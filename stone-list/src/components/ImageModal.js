@@ -54,6 +54,14 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />
     };
+    // Conditional styling based on type
+    const dialogContentStyle = {
+        padding: 0,
+        position: 'relative',
+        ...(type !== 'image' && { height: '80vh' }), // Apply height only if the type is not 'image'
+        maxHeight: '90vh',
+        overflowY: 'auto',
+    };
 
     return (
         <Dialog
@@ -68,7 +76,7 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                 }
             }}
         >
-            <DialogContent style={{ padding: 0, position: 'relative', height: '80vh' }}>
+            <DialogContent style={dialogContentStyle}>
                 <IconButton
                     edge="end"
                     color="inherit"
