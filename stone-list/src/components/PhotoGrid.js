@@ -60,6 +60,7 @@ const PhotoGrid = () => {
                                 style={{ width: '100%', height: '200px', cursor: 'pointer', objectFit: 'cover' }}
                                 onClick={() => handleClickOpen(imageUrls, 'image')}
                                 onContextMenu={(e) => e.preventDefault()} // Disable right-click
+                                onTouchStart={(e) => e.preventDefault()} // Disable right-click
                             />
                         )}
                         <h3>{list.Name}</h3>

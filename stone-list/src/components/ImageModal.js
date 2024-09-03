@@ -99,6 +99,7 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                                     objectFit: 'contain'
                                 }}
                                 onContextMenu={(e) => e.preventDefault()} // Disable right-click
+                                onTouchStart={(e) => e.preventDefault()} // Disable right-click
                             />
                         </div>
                     ) : (
@@ -114,6 +115,7 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                                             objectFit: 'contain'
                                         }}
                                         onContextMenu={(e) => e.preventDefault()} // Disable right-click
+                                        onTouchStart={(e) => e.preventDefault()} // Disable right-click
                                     />
                                 </div>
                             ))}
