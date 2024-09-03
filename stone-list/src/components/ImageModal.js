@@ -100,6 +100,9 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                                 }}
                                 onContextMenu={(e) => e.preventDefault()} // Disable right-click
                                 onTouchStart={(e) => e.preventDefault()} // Disable right-click
+                                onTouchEnd={(e) => e.preventDefault()} // Disable right-click
+                                onTouchMove={(e) => e.preventDefault()} // Disable right-click
+
                             />
                         </div>
                     ) : (

@@ -61,6 +61,8 @@ const PhotoGrid = () => {
                                 onClick={() => handleClickOpen(imageUrls, 'image')}
                                 onContextMenu={(e) => e.preventDefault()} // Disable right-click
                                 onTouchStart={(e) => e.preventDefault()} // Disable right-click
+                                onTouchEnd={(e) => e.preventDefault()} // Disable right-click
+                                onTouchMove={(e) => e.preventDefault()} // Disable right-click
                             />
                         )}
                         <h3>{list.Name}</h3>
