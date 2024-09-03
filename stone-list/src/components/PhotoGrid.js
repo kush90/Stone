@@ -42,23 +42,24 @@ const PhotoGrid = () => {
                 // Extract file IDs from Google Drive URLs
                 const imageFileIds = list.Images?.map(url => url.match(/d\/(.+?)\/view/)?.[1]) || [];
                 const videoFileIds = list.Videos?.map(url => url.match(/d\/(.+?)\/view/)?.[1]) || [];
-                
+
                 // Use the thumbnail URL format for images
                 const imageUrls = imageFileIds.map(id => `https://drive.google.com/thumbnail?id=${id}&sz=w1000`);
                 const videoUrls = videoFileIds.map(id => `https://drive.google.com/file/d/${id}/preview`);
 
                 return (
-                   
+
                     <div className="w3-quarter" key={index}>
                         <p>No. {index + 1}</p> {/* Display count number */}
 
                         {imageUrls.length > 0 && (
-                            
+
                             <img
                                 src={imageUrls[0]} // Display the first image as a preview
                                 alt={list.Name}
-                                style={{ width: '100%', cursor: 'pointer' }}
+                                style={{ width: '100%', height: '200px', cursor: 'pointer', objectFit: 'cover' }}
                                 onClick={() => handleClickOpen(imageUrls, 'image')}
+                                onContextMenu={(e) => e.preventDefault()} // Disable right-click
                             />
                         )}
                         <h3>{list.Name}</h3>

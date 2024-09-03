@@ -46,14 +46,15 @@ const CustomNextArrow = (props) => (
 const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
     const sliderSettings = {
         dots: true,
-        infinite: true,
+        infinite: imageUrls.length > 1,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight: true,
-        prevArrow: <CustomPrevArrow />,
-        nextArrow: <CustomNextArrow />
+        prevArrow: imageUrls.length > 1 ? <CustomPrevArrow /> : null,
+        nextArrow: imageUrls.length > 1 ? <CustomNextArrow /> : null
     };
+
     // Conditional styling based on type
     const dialogContentStyle = {
         padding: 0,
@@ -87,21 +88,37 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                     <CloseIcon />
                 </IconButton>
                 {type === 'image' && imageUrls.length > 0 && (
-                    <Slider {...sliderSettings} style={{ height: '100%' }}>
-                        {imageUrls.map((url, index) => (
-                            <div key={index} style={{ position: 'relative', height: '100%' }}>
-                                <img
-                                    src={url}
-                                    alt={`Enlarged ${index + 1}`}
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'contain'
-                                    }}
-                                />
-                            </div>
-                        ))}
-                    </Slider>
+                    imageUrls.length === 1 ? (
+                        <div style={{ position: 'relative', height: '100%' }}>
+                            <img
+                                src={imageUrls[0]}
+                                alt="Enlarged"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'contain'
+                                }}
+                                onContextMenu={(e) => e.preventDefault()} // Disable right-click
+                            />
+                        </div>
+                    ) : (
+                        <Slider {...sliderSettings} style={{ height: '100%' }}>
+                            {imageUrls.map((url, index) => (
+                                <div key={index} style={{ position: 'relative', height: '100%' }}>
+                                    <img
+                                        src={url}
+                                        alt={`Enlarged ${index + 1}`}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'contain'
+                                        }}
+                                        onContextMenu={(e) => e.preventDefault()} // Disable right-click
+                                    />
+                                </div>
+                            ))}
+                        </Slider>
+                    )
                 )}
                 {type === 'video' && videoUrls.length > 0 && (
                     <div style={{ position: 'relative', height: '100%' }}>
