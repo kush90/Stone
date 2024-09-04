@@ -39,34 +39,31 @@ const PhotoGrid = () => {
         e.preventDefault();
     };
 
-    const disableLongPress = (e) => {
-        e.preventDefault(); // Prevents the long-press behavior
-    };
-
     return (
         <div className="w3-row-padding w3-padding-16 w3-center" id="food">
             {loading && <p>Loading...</p>}
             {!loading && lists.length > 0 && lists.map((list, index) => {
-                // Extract file IDs from Google Drive URLs
                 const imageFileIds = list.Images?.map(url => url.match(/d\/(.+?)\/view/)?.[1]) || [];
                 const videoFileIds = list.Videos?.map(url => url.match(/d\/(.+?)\/view/)?.[1]) || [];
 
-                // Use the thumbnail URL format for images
                 const imageUrls = imageFileIds.map(id => `https://drive.google.com/thumbnail?id=${id}&sz=w1000`);
                 const videoUrls = videoFileIds.map(id => `https://drive.google.com/file/d/${id}/preview`);
 
                 return (
                     <div className="w3-quarter" key={index}>
-                        <p>No. {index + 1}</p> {/* Display count number */}
+                        <p>No. {index + 1}</p>
                         {imageUrls.length > 0 && (
-                            <img
-                                src={imageUrls[0]} // Display the first image as a preview
-                                alt={list.Name}
-                                style={{ width: '100%', height: '200px', cursor: 'pointer', objectFit: 'cover' }}
+                            <div
+                                style={{ position: 'relative', width: '100%', height: '200px' }}
                                 onClick={() => handleClickOpen(imageUrls, 'image')}
-                                onContextMenu={disableContextMenu} // Disable right-click on desktop
-                                onTouchStart={disableLongPress} // Prevent long-press context menu on mobile
-                            />
+                                onContextMenu={disableContextMenu}
+                            >
+                                <img
+                                    src={imageUrls[0]} // Display the first image as a preview
+                                    alt={list.Name}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                />
+                            </div>
                         )}
                         <h3>{list.Name}</h3>
                         <p>{list.Description}</p>
@@ -74,7 +71,10 @@ const PhotoGrid = () => {
                         {videoUrls.length > 0 && videoUrls.map((videoUrl, i) => (
                             <a
                                 key={i}
-                                onClick={() => handleClickOpen([videoUrl], 'video')}
+                                onClick={(e) => {
+                                    e.preventDefault(); // Prevent default anchor behavior
+                                    handleClickOpen([videoUrl], 'video');
+                                }}
                                 style={{
                                     color: 'blue',
                                     textDecoration: 'underline',
