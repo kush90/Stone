@@ -35,6 +35,14 @@ const PhotoGrid = () => {
         setOpen(false);
     };
 
+    const disableContextMenu = (e) => {
+        e.preventDefault();
+    };
+
+    const disableLongPress = (e) => {
+        e.preventDefault(); // Prevents the long-press behavior
+    };
+
     return (
         <div className="w3-row-padding w3-padding-16 w3-center" id="food">
             {loading && <p>Loading...</p>}
@@ -48,21 +56,16 @@ const PhotoGrid = () => {
                 const videoUrls = videoFileIds.map(id => `https://drive.google.com/file/d/${id}/preview`);
 
                 return (
-
                     <div className="w3-quarter" key={index}>
                         <p>No. {index + 1}</p> {/* Display count number */}
-
                         {imageUrls.length > 0 && (
-
                             <img
                                 src={imageUrls[0]} // Display the first image as a preview
                                 alt={list.Name}
                                 style={{ width: '100%', height: '200px', cursor: 'pointer', objectFit: 'cover' }}
                                 onClick={() => handleClickOpen(imageUrls, 'image')}
-                                onContextMenu={(e) => e.preventDefault()} // Disable right-click
-                                onTouchStart={(e) => e.preventDefault()} // Disable right-click
-                                onTouchEnd={(e) => e.preventDefault()} // Disable right-click
-                                onTouchMove={(e) => e.preventDefault()} // Disable right-click
+                                onContextMenu={disableContextMenu} // Disable right-click on desktop
+                                onTouchStart={disableLongPress} // Prevent long-press context menu on mobile
                             />
                         )}
                         <h3>{list.Name}</h3>
@@ -71,8 +74,7 @@ const PhotoGrid = () => {
                         {videoUrls.length > 0 && videoUrls.map((videoUrl, i) => (
                             <a
                                 key={i}
-                                src={videoUrl}
-                                onClick={() => handleClickOpen(videoUrl, 'video')}
+                                onClick={() => handleClickOpen([videoUrl], 'video')}
                                 style={{
                                     color: 'blue',
                                     textDecoration: 'underline',
