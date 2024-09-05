@@ -54,7 +54,7 @@ const PhotoGrid = () => {
                         <p>No. {index + 1}</p>
                         {imageUrls.length > 0 && (
                             <div
-                                style={{ position: 'relative', width: '100%', height: '200px' }}
+                            className="photo-grid-item"
                                 onClick={() => handleClickOpen(imageUrls, 'image')}
                                 onContextMenu={disableContextMenu}
                             >
@@ -65,9 +65,9 @@ const PhotoGrid = () => {
                                 />
                             </div>
                         )}
-                        <h3>{list.Name}</h3>
-                        <p>{list.Description}</p>
-                        <p>{list.Price}</p>
+                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: '10px 0'}}>{list.Name}</h3>
+                        <p style={{ fontSize: '14px', color: '#555', marginBottom: '5px' }}>{list.Description}</p>
+                        <p style={{ fontSize: '16px', color: '#000', fontWeight: 'bold'}}>{list.Price}</p>
                         {videoUrls.length > 0 && videoUrls.map((videoUrl, i) => (
                             <a
                                 key={i}
