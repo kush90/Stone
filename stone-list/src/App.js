@@ -25,7 +25,7 @@ function App() {
       >
         <PhotoGrid />
         {/* <hr id="about" /> */}
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

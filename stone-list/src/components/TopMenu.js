@@ -11,7 +11,7 @@ const TopMenu = ({ onOpen }) => {
           ☰
         </div> */}
         {/* <div className="w3-right w3-padding-16">Mail</div> */}
-        <div className="w3-center w3-padding-16">Available Gems</div>
+        <div className="w3-center w3-padding-16">San Tha Gems & Jewellery</div>
       </div>
     </div>
   );
