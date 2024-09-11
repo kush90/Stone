@@ -26,6 +26,8 @@ export const readExcelFile = async (sampleFile, filterCriteria) => {
             Price: row[2],
             Images: row[3] ? row[3].replace(/[\[\]]/g, '').split(',') : [], // Remove brackets and split
             Videos: row[4] ? row[4].replace(/[\[\]]/g, '').split(',') : [], // Remove brackets and split
+            Files: row[5] ? row[5].replace(/[\[\]]/g, '').split(',') : [], // Remove brackets and split
+
         };
     });
 

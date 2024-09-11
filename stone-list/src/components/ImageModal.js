@@ -43,7 +43,7 @@ const CustomNextArrow = (props) => (
     </IconButton>
 );
 
-const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
+const ImageModal = ({ open, onClose, imageUrls, videoUrls, pdfUrls, type }) => {
     const sliderSettings = {
         dots: true,
         infinite: imageUrls.length > 1,
@@ -100,9 +100,6 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                                 }}
                                 onContextMenu={(e) => e.preventDefault()} // Disable right-click
                                 onTouchStart={(e) => e.preventDefault()} // Disable right-click
-                                onTouchEnd={(e) => e.preventDefault()} // Disable right-click
-                                onTouchMove={(e) => e.preventDefault()} // Disable right-click
-
                             />
                         </div>
                     ) : (
@@ -128,7 +125,7 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                 {type === 'video' && videoUrls.length > 0 && (
                     <div style={{ position: 'relative', height: '100%' }}>
                         <iframe
-                            src={videoUrls}
+                            src={videoUrls[0]} // Only showing the first video for now
                             style={{
                                 position: 'absolute',
                                 top: 0,
@@ -138,6 +135,22 @@ const ImageModal = ({ open, onClose, imageUrls, videoUrls, type }) => {
                                 border: 'none'
                             }}
                             allow="autoplay; encrypted-media"
+                        />
+                    </div>
+                )}
+                {type === 'pdf' && pdfUrls.length > 0 && (
+                    <div style={{ position: 'relative', height: '100%' }}>
+                        <iframe
+                            src={pdfUrls[0]} // Only showing the first PDF for now
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                border: 'none'
+                            }}
+                            title="PDF Viewer"
                         />
                     </div>
                 )}
